@@ -1,0 +1,181 @@
+<!-- 🌐 Sidebar -->
+<aside
+  class="fixed top-0 left-0 z-30 h-screen w-64 bg-white text-gray-800 border-r border-gray-200 shadow-md flex flex-col transition-all duration-300"
+>
+  <!-- 🔷 Logo Section -->
+  <div class="flex items-center justify-center h-20 border-b border-gray-100">
+    <h1
+      class="text-3xl font-extrabold tracking-wide bg-gradient-to-r from-[#82d4e2] to-[#4eb3c5] bg-clip-text text-transparent animate-pulse select-none"
+      style="font-family: 'Poppins', sans-serif;"
+    >
+      Trilingo
+    </h1>
+  </div>
+
+  <!-- 🧭 Navigation -->
+  <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
+    <!-- Dashboard -->
+    <a
+      routerLink="/Dashboard"
+      routerLinkActive="bg-[#82d4e2]/10 text-[#0098b3]"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="flex items-center px-4 py-3 rounded-lg hover:bg-[#82d4e2]/10 hover:text-[#0098b3] transition-all duration-200"
+    >
+      <i class="uil uil-estate text-lg mr-3"></i>
+      Dashboard
+    </a>
+
+    <!-- Curriculum Dropdown (same style as Language dropdown) -->
+    <div class="relative group">
+      <button
+        (click)="toggleCurriculum()"
+        class="flex items-center justify-between w-full px-4 py-3 rounded-lg hover:bg-[#82d4e2]/10 hover:text-[#0098b3] transition-all"
+      >
+        <span class="flex items-center gap-3">
+          <i class="uil uil-book-open text-lg"></i> Curriculum
+        </span>
+        <i
+          class="uil"
+          [ngClass]="{
+            'uil-angle-down': !isCurriculumOpen,
+            'uil-angle-up': isCurriculumOpen
+          }"
+        ></i>
+      </button>
+
+      <ul
+        *ngIf="isCurriculumOpen"
+        class="absolute left-64 top-0 w-52 bg-white border border-gray-200 rounded-lg shadow-lg space-y-1 z-50"
+      >
+        <li>
+          <a
+            routerLink="/Levels"
+            routerLinkActive="bg-[#82d4e2]/10 text-[#0098b3]"
+            class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#82d4e2]/10 hover:text-[#0098b3]"
+          >
+            Levels & Stages
+          </a>
+        </li>
+        <li>
+          <a
+            routerLink="/MainActivityTypes"
+            routerLinkActive="bg-[#82d4e2]/10 text-[#0098b3]"
+            class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#82d4e2]/10 hover:text-[#0098b3]"
+          >
+            Activity Types
+          </a>
+        </li>
+        <li>
+          <a
+            routerLink="/ActivityMethods"
+            routerLinkActive="bg-[#82d4e2]/10 text-[#0098b3]"
+            class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#82d4e2]/10 hover:text-[#0098b3]"
+          >
+            Activity Methods
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Users -->
+    <a
+      routerLink="/Users"
+      routerLinkActive="bg-[#82d4e2]/10 text-[#0098b3]"
+      class="flex items-center px-4 py-3 rounded-lg hover:bg-[#82d4e2]/10 hover:text-[#0098b3] transition-all duration-200"
+    >
+      <i class="uil uil-users-alt text-lg mr-3"></i>
+      Users & Roles
+    </a>
+
+    <!-- Reports -->
+    <a
+      routerLink="/Reports"
+      routerLinkActive="bg-[#82d4e2]/10 text-[#0098b3]"
+      class="flex items-center px-4 py-3 rounded-lg hover:bg-[#82d4e2]/10 hover:text-[#0098b3] transition-all duration-200"
+    >
+      <i class="uil uil-chart text-lg mr-3"></i>
+      Reports & Progress
+    </a>
+  </nav>
+
+  <!-- Footer -->
+  <div class="border-t border-gray-100 p-4 text-sm text-gray-500 text-center">
+    Admin Panel
+  </div>
+</aside>
+
+<!-- 🌈 Top Bar -->
+<header
+  class="fixed top-0 left-64 right-0 z-20 h-20 bg-white text-gray-800 border-b border-gray-200 shadow-sm flex items-center justify-between px-6"
+>
+  <!-- Left -->
+  <div class="flex items-center gap-3">
+    <h2 class="text-lg font-semibold text-gray-700">Dashboard</h2>
+  </div>
+
+  <!-- Right -->
+  <div class="flex items-center gap-5">
+    <!-- Notification -->
+    <button
+      class="relative p-2 text-gray-500 hover:bg-gray-100 rounded-full transition-colors duration-200"
+      title="Notifications"
+    >
+      <i class="uil uil-bell text-2xl"></i>
+      <span class="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full"></span>
+    </button>
+
+    <!-- 🌍 Language Dropdown -->
+    <div class="relative">
+      <button
+        (click)="toggleLanguage()"
+        class="flex items-center gap-2 p-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-all"
+      >
+        <i class="uil uil-globe text-xl"></i>
+        <span class="text-sm font-medium">{{ selectedLanguage }}</span>
+        <i
+          class="uil"
+          [ngClass]="{
+            'uil-angle-down': !isLanguageOpen,
+            'uil-angle-up': isLanguageOpen
+          }"
+        ></i>
+      </button>
+
+      <ul
+        *ngIf="isLanguageOpen"
+        class="absolute right-0 mt-2 w-40 bg-white text-gray-700 border border-gray-200 rounded-lg shadow-lg z-50"
+      >
+        <li
+          (click)="setLanguage('English')"
+          class="px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer"
+        >
+          English
+        </li>
+        <li
+          (click)="setLanguage('Tamil')"
+          class="px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer"
+        >
+          Tamil
+        </li>
+        <li
+          (click)="setLanguage('Sinhala')"
+          class="px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer"
+        >
+          Sinhala
+        </li>
+      </ul>
+    </div>
+
+    <!-- 👤 Profile -->
+    <img
+      src="/Logo.png"
+      alt="Profile"
+      class="w-10 h-10 rounded-full border-2 border-[#82d4e2] cursor-pointer"
+    />
+  </div>
+</header>
+
+<!-- 🌿 Main Page Area -->
+<main class="ml-64 pt-24 min-h-screen bg-gray-50 p-6 md:p-8 transition-all">
+  <router-outlet></router-outlet>
+</main>
