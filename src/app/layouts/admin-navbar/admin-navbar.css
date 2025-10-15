@@ -1,0 +1,11 @@
+@import url('https://unicons.iconscout.com/release/v4.0.8/css/line.css');
+
+/* Animate gradient for logo */
+@keyframes floaty {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+  100% { transform: translateY(0px); }
+}
+h1 {
+  animation: floaty 3s ease-in-out infinite, pulse 2s infinite;
+}
